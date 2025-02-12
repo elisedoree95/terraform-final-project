@@ -2,9 +2,9 @@ version: 0.2
 
 env:
   variables:
-    TF_STATE_BUCKET: "amplify-airecipegenerator-modelintrospectionschema-or0dpdqqcxuh" # S3 bucket for storing Terraform state
-    TF_STATE_KEY: "terraform.tfstate" # State file location in S3
-    TF_REGION: "ca-central-1" # AWS Region
+    TF_STATE_BUCKET: "terraformstatefileelisefeb112025 " # S3 bucket for Terraform state
+    TF_STATE_KEY: "terraform.tfstate" # State file name in S3
+    TF_REGION: ca-central-1 # AWS region name
     ACTION: "apply" # Default action: 'apply' or 'destroy'
 
 phases:
@@ -12,11 +12,12 @@ phases:
     runtime-versions:
       python: 3.9
     commands:
-      - echo "Installing dependencies..."
-      - sudo apt-get update && sudo apt-get install -y curl gnupg software-properties-common
-      - curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
-      - echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-      - sudo apt-get update && sudo apt-get install terraform -y
+      - echo "Installing Terraform on Amazon Linux..."
+      - sudo yum update -y
+      - sudo yum install -y wget unzip
+      - wget https://releases.hashicorp.com/terraform/1.6.0/terraform_1.6.0_linux_amd64.zip
+      - unzip terraform_1.6.0_linux_amd64.zip
+      - sudo mv terraform /usr/local/bin/
       - terraform --version
 
   pre_build:
