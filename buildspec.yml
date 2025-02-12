@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    TF_STATE_BUCKET: "terraformstatefileelisefeb112025 " # S3 bucket for Terraform state
+    TF_STATE_BUCKET: "terraformstatefileelisefeb112025" # S3 bucket for Terraform state
     TF_STATE_KEY: "terraform.tfstate" # State file name in S3
     TF_REGION: ca-central-1 # AWS region name
     ACTION: "apply" # Default action: 'apply' or 'destroy'
